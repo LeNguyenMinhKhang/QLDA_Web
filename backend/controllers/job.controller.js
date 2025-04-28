@@ -76,7 +76,7 @@ export const getJobById = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-}
+} 
 
 export const getAdminJobs = async (req, res) => {
     try {

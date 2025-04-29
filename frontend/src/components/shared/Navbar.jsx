@@ -5,6 +5,7 @@ import {Avatar,AvatarImage} from '../ui/avatar';
 import {Button} from '../ui/button'
 import {LogOut, User, User2} from 'lucide-react'
 
+
 const Navbar = () => {
     const user = false;
     return (
@@ -22,8 +23,8 @@ const Navbar = () => {
                     {
                         !user ? (
                             <div className='flex items-center gap-2'>
-                                <Button variant="outline">Login</Button>
-                                <Button className="bg-[#2190f8]" >Sign up</Button>
+                                <Link to="/Login"><Button variant="outline">Login</Button></Link>
+                                <Link to="/Signup"><Button className="bg-[#2190f8]" >Sign up</Button></Link>
                             </div>
                         ) : (
                             <Popover>

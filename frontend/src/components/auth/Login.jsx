@@ -1,20 +1,29 @@
-import React, { use } from 'react'
+import React from 'react'
 import Navbar from '../shared/Navbar'
 import { Label } from '@radix-ui/react-label'
 import { Input } from "@/components/ui/input"
 import { RadioGroup } from "@/components/ui/radio-group"
 import { Button } from '../ui/button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { toast } from 'sonner'
+import axios from 'axios'
+import { USER_API_END_POINT } from '../../utils/constant'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoading } from '../../redux/authSlice'
+import store from '../../redux/store'
+import { Loader2 } from 'lucide-react'
+
 
 const Login = () => {
-    const[input, setInput] = useState({
+    const [input, setInput] = useState({
         email: "",
         password: "",
         role: "",
-
-    })
-
+    });
+    const { loading } = useSelector(store => store.auth);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const changeEventHandler = (e) => {
         setInput({
             ...input,
@@ -27,22 +36,27 @@ const Login = () => {
             file: e.target.files?.[0]
         })
     }
-const submitHandler = async (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`${USER_API_ENDPOINT}/register`, input, {
+            dispatch(setLoading(true));
+            const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
                 headers: {
                     "Content-Type": "application/json",
                 },
                 withCredentials: true,
             });
-            if(res.data.success){
-                navigate("/");
+            console.log(res.data.success);
+            if (res.data.success) {
                 toast.success(res.data.message);
+                navigate("/");
             }
         } catch (error) {
             console.log(error);
-            toast.error(error.response.data.message);
+            const errorMessage = error?.response?.data?.message || "Something went wrong!";
+            toast.error(errorMessage);
+        } finally {
+            dispatch(setLoading(false));
         }
     }
     return (
@@ -77,24 +91,24 @@ const submitHandler = async (e) => {
                     <div className='flex items-center justify-between'>
                         <RadioGroup className='flex items-center gap-4 my-5'>
                             <div className="flex items-center space-x-2">
-                                <Input 
-                                type="radio"
-                                name = "role"
-                                value="student"
-                                checked = {input.role === "student"}
-                                onChange={changeEventHandler}
-                                className="cursor-pointer"
+                                <Input
+                                    type="radio"
+                                    name="role"
+                                    value="student"
+                                    checked={input.role === "student"}
+                                    onChange={changeEventHandler}
+                                    className="cursor-pointer"
                                 />
                                 <Label htmlFor="r1">Student</Label>
                             </div>
                             <div className="flex items-center space-x-2">
-                            <Input 
-                                type="radio"
-                                name = "role"
-                                value="Recruiter"
-                                checked = {input.role === "Recruiter"}
-                                onChange={changeEventHandler}
-                                className="cursor-pointer"
+                                <Input
+                                    type="radio"
+                                    name="role"
+                                    value="recruiter"
+                                    checked={input.role === "recruiter"}
+                                    onChange={changeEventHandler}
+                                    className="cursor-pointer"
                                 />
                                 <Label htmlFor="r2">Recruiter</Label>
                             </div>
@@ -102,9 +116,12 @@ const submitHandler = async (e) => {
                         </RadioGroup>
 
                     </div>
-                    <Button type = "submit" className={'w-full my-4'}>Logn In</Button>
-                    <span className='text-sm'>Already have an account? 
-                        <Link to="/Signup" className="text-blue-500 ">
+                    {
+                        loading?<Button className="w-full my-4"><Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait</Button>
+                               : <Button type="submit" className={'w-full my-4'}>Login</Button>
+                    }
+                    <span className='text-sm'>Already have an account?
+                        <Link to="/signup" className="text-blue-500 ">
                             Sign up
                         </Link>
                     </span>

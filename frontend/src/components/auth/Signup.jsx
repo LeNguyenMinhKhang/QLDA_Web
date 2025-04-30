@@ -4,11 +4,15 @@ import { Label } from '@radix-ui/react-label'
 import { Input } from "@/components/ui/input"
 import { RadioGroup } from "@/components/ui/radio-group"
 import { Button } from '../ui/button'
-import {  Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { USER_API_ENDPOINT } from '../../utils/constant'
-
-
+import { toast } from 'sonner'
+import axios from 'axios'
+import { USER_API_END_POINT } from '../../utils/constant'
+import { useNavigate } from 'react-router-dom'
+import store from '../../redux/store'
+import { useDispatch } from 'react-redux'
+import { setLoading } from '../../redux/authSlice'
 const Signup = () => {
     const [input, setInput] = useState({
         fullname: "",
@@ -18,8 +22,9 @@ const Signup = () => {
         role: "",
         file: "",
     })
+    const {loading} = useSelector(store => store.auth);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const changeEventHandler = (e) => {
         setInput({
             ...input,
@@ -40,23 +45,27 @@ const Signup = () => {
         formData.append("phoneNumber", input.phoneNumber);
         formData.append("password", input.password);
         formData.append("role", input.role);
-        if(input.file) {
+        if (input.file) {
             formData.append("file", input.file);
         }
         try {
-            const res = await axios.post(`${USER_API_ENDPOINT}/register`, formData, {
+            dispatch(setLoading(true));
+            const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    "Content-Type": "multipart/form-data"
                 },
                 withCredentials: true,
             });
-            if(res.data.success){
+            if (res.data.success) {
                 navigate("/login");
                 toast.success(res.data.message);
             }
         } catch (error) {
             console.log(error);
-            toast.error(error.response.data.message);
+            const errorMessage = error?.response?.data?.message || "Something went wrong!";
+            toast.error(errorMessage);
+        } finally {
+            dispatch(setLoading(false));
         }
     }
 
@@ -120,18 +129,18 @@ const Signup = () => {
                                     onChange={changeEventHandler}
                                     className="cursor-pointer"
                                 />
-                                <Label htmlFor="r1">Student</Label>
+                                <Label htmlFor="r1">student</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Input
                                     type="radio"
                                     name="role"
-                                    value="Recruiter"
-                                    checked={input.role === "Recruiter"}
+                                    value="recruiter"
+                                    checked={input.role === "recruiter"}
                                     onChange={changeEventHandler}
                                     className="cursor-pointer"
                                 />
-                                <Label htmlFor="r2">Recruiter</Label>
+                                <Label htmlFor="r2">recruiter</Label>
                             </div>
 
                         </RadioGroup>
@@ -145,9 +154,13 @@ const Signup = () => {
                             />
                         </div>
                     </div>
+                    {
+                        loading?<Button className="w-full my-4"><Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait</Button>
+                               : <Button type="submit" className={'w-full my-4'}>Sign Up</Button>
+                    }
                     <Button type="submit" className={'w-full my-4'}>Sign up</Button>
                     <span className='text-sm'>Already have an account?
-                        <Link to="/Login" className="text-blue-500 ">
+                        <Link to="/login" className="text-blue-500 ">
                             Login
                         </Link>
                     </span>

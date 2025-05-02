@@ -4,7 +4,7 @@ import { Label } from "./ui/label"
 const filterData = [
     {
         filterType: "Location",
-        array: ["India", "USA", "UK", "Canada"]
+        array: ["Vietnam", "USA", "UK", "Canada"]
     },
     {
         filterType: "Industry",
@@ -12,7 +12,7 @@ const filterData = [
     },
     {
         filterType: "Salary",
-        array: ["0-5LPA", "5-10LPA", "10-15LPA", "15-20LPA"]
+        array: ["5-10tr VNĐ", "10-15tr VNĐ", "15-20tr VNĐ", "20-30tr VNĐ"]
     }
 ]
 

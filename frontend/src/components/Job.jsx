@@ -21,17 +21,17 @@ const Job = () => {
                 </Button>
                 <div>
                     <h1 className='font-medium text-lg'>Company Name</h1>
-                    <p className='text-sm text-gray-500'>India</p>
+                    <p className='text-sm text-gray-500'>Vietnam</p>
                 </div>
             </div>
             <div>
                 <h1 className='font-bold text-lg my-2'>Title</h1>
-                <p className='text-sm text-gray-600'>Lorem ipsum dolor sit amet consectetur, adipiscing elit, Assumenda eos provident a dolorem perferendis ducrimus deserunt nesciunt quae sequi.Ab?</p>
+                <p className='text-sm text-gray-600'>Scam + đa cấp</p>
             </div>
             <div className='flex items-center gap-2 mt-4'>
                 <Badge className='text-blue-700 font-bold' variant='ghost'>12 Positions</Badge>
                 <Badge className='text-[#F83002] font-bold' variant='ghost'>Part Time</Badge>
-                <Badge className='text-[#7209b7] font-bold' variant='ghost'>24LPA</Badge>
+                <Badge className='text-[#7209b7] font-bold' variant='ghost'>2tr</Badge>
             </div>
             <div className='flex items-center gap-4 mt-4'>
             <Button onClick={() => navigate(`/description/${jobId}`)} variant='outline'>Detail</Button>

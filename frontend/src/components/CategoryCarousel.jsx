@@ -7,11 +7,12 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const category = [
-    "Frontend Development",
-    "Backend Development",
+    "Frontend Developer",
+    "Backend Developer",
     "Data Science",
     "FullStack Development",
-    "Graphic Design"
+    "Graphic Design",
+    "Game Developer"
 ]
 
 const CategoryCarousel = () => {
@@ -28,7 +29,7 @@ const CategoryCarousel = () => {
                 <CarouselContent>
                     {
                         category.map((cat, index) => (
-                            <CarouselItem className='md:basis-1/2 lg-basis-1/3' >
+                            <CarouselItem className='md:basis-1/2 lg:basis-1/3 p-0' >
                                 <Button onClick={()=> searchJobHandler(cat)} variant="outline" className='rounded-full'>{cat}</Button>
                             </CarouselItem>
                         ))

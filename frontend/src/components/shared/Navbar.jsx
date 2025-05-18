@@ -34,8 +34,8 @@ const Navbar = () => {
     <div className="bg-white">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
         <div>
-          <h1 className="text-2xl font-bold">
-            Jobs <span className="text-[#ff0000]"> Portal </span>
+          <h1 className="text-3xl font-bold flex">
+            <img src="/Icon.svg" alt="icon" className="scale-75" /> Talent <span className="text-[#6CDF62]"> Hub </span>
           </h1>
         </div>
         <div className="flex items-canter gap-2">
@@ -69,7 +69,7 @@ const Navbar = () => {
                 <Button variant="outline">Login</Button>
               </Link>
               <Link to="/Signup">
-                <Button className="bg-[#2190f8]">Sign up</Button>
+                <Button className="bg-[#6CDF62]">Sign up</Button>
               </Link>
             </div>
           ) : (

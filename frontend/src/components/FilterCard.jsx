@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 const filterData = [
   {
     filterType: "Location",
-    array: ["Vietnam", "USA", "UK", "Canada"],
+    array: ["Việt Nam", "US", "UK", "Canada"],
   },
   {
     filterType: "Industry",

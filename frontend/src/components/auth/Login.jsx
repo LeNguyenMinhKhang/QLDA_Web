@@ -81,7 +81,7 @@ const Login = () => {
                         />
                     </div>
                     <div className='flex items-center justify-between'>
-                        <RadioGroup className="flex items-center gap-4 my-5">
+                        <RadioGroup className="flex items-center gap-10 my-5">
                             <div className="flex items-center space-x-2">
                                 <Input
                                     type="radio"
@@ -89,9 +89,9 @@ const Login = () => {
                                     value="student"
                                     checked={input.role === 'student'}
                                     onChange={changeEventHandler}
-                                    className="cursor-pointer"
+                                    className="cursor-pointer scale-35"
                                 />
-                                <Label htmlFor="r1">Student</Label>
+                                <Label htmlFor="r1">Job Seeker</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Input

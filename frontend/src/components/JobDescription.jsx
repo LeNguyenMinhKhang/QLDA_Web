@@ -65,8 +65,8 @@ const JobDescription = () => {
   }, [jobId, dispatch, user?._id]);
 
   return (
-    <div className="max-w-7xl mx-auto my-10">
-      <div className="flex items-center justify-between">
+    <div className=" max-w-7xl mx-auto my-10 rounded-2xl border-2 border-[#7c7676] p-6">
+      <div className="flex items-center justify-between ">
         <div>
           <h1 className="font-bold text-xl">{singleJob?.title}</h1>
           <div className="flex items-center gap-2 mt-4">
@@ -77,7 +77,7 @@ const JobDescription = () => {
               {singleJob?.jobType}
             </Badge>
             <Badge className={"text-[#7209b7] font-bold"} variant="ghost">
-              {singleJob?.salary} Dollars
+              {singleJob?.salary} tr VNĐ
             </Badge>
           </div>
         </div>
@@ -87,7 +87,7 @@ const JobDescription = () => {
           className={`rounded-lg ${
             isApplied
               ? "bg-gray-600 cursor-not-allowed"
-              : "bg-[#7209b7] hover:bg-[#5f32ad]"
+              : "bg-[#6CDF62] hover:bg-[#5e9559]"
           }`}
         >
           {isApplied ? "Already Applied" : "Apply Now"}
@@ -124,7 +124,7 @@ const JobDescription = () => {
         <h1 className="font-bold my-1">
           Salary:{" "}
           <span className="pl-4 font-normal text-gray-800">
-            {singleJob?.salary} Dollars
+            {singleJob?.salary} tr VNĐ
           </span>
         </h1>
         <h1 className="font-bold my-1">
